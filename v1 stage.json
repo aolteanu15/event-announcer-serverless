@@ -1,0 +1,59 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "event-announcer-http-api",
+    "version" : "2025-07-25"
+  },
+  "servers" : [ {
+    "url" : "https://lohdbk8dqi.execute-api.eu-north-1.amazonaws.com/{basePath}",
+    "variables" : {
+      "basePath" : {
+        "default" : "v1"
+      }
+    }
+  } ],
+  "paths" : {
+    "/event" : {
+      "post" : {
+        "responses" : {
+          "default" : {
+            "description" : "Default response for POST /event"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "payloadFormatVersion" : "2.0",
+          "type" : "aws_proxy",
+          "httpMethod" : "POST",
+          "uri" : "arn:aws:apigateway:eu-north-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-north-1:817901212327:function:createEvent/invocations",
+          "connectionType" : "INTERNET"
+        }
+      }
+    },
+    "/subscribe" : {
+      "post" : {
+        "operationId" : "subscribeUser",
+        "responses" : {
+          "default" : {
+            "description" : "Default response for POST /subscribe"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "payloadFormatVersion" : "2.0",
+          "type" : "aws_proxy",
+          "httpMethod" : "POST",
+          "uri" : "arn:aws:apigateway:eu-north-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-north-1:817901212327:function:subscribeUser/invocations",
+          "connectionType" : "INTERNET",
+          "timeoutInMillis" : 30000
+        }
+      }
+    }
+  },
+  "x-amazon-apigateway-cors" : {
+    "allowMethods" : [ "OPTIONS", "POST" ],
+    "allowHeaders" : [ "content-type" ],
+    "maxAge" : -42,
+    "allowCredentials" : false,
+    "allowOrigins" : [ "*" ]
+  },
+  "x-amazon-apigateway-importexport-version" : "1.0"
+}
